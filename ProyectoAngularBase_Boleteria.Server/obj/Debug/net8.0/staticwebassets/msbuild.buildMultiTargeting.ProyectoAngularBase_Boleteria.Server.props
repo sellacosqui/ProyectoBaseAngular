@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ProyectoAngularBase_Boleteria.Server.props" />
+</Project>
