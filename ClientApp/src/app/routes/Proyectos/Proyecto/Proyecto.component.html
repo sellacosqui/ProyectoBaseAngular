@@ -1,0 +1,279 @@
+
+<mat-card>
+  <mat-card-title>Proyecto {{proyectos.nombre_Diminutivo}}</mat-card-title>
+
+  <div class="example-container">
+    <div class="row">
+      <div class="col-sm-3">
+        <mat-form-field class="col-sm-12">
+          <input matInput placeholder="Nombre" value="{{proyectos.nombre}}" disabled>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field  class="col-sm-12">
+          <input matInput placeholder="Nombre Diminutivo" value="{{proyectos.nombre_Diminutivo}}" disabled>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field  class="col-sm-12">
+          <input matInput placeholder="Descripccion" value="{{proyectos.descripccion}}" disabled>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field  class="col-sm-12">
+          <input matInput placeholder="Gerente Proyecto" value="{{proyectos.gerente_Proyecto}}" disabled>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field  class="col-sm-12">
+          <input matInput placeholder="Presupuesto" value="{{proyectos.presupuesto}}" disabled>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field  class="col-sm-12">
+          <input matInput placeholder="Contrato" value="{{proyectos.contrato}}" disabled>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field  class="col-sm-12"> 
+          <input matInput placeholder="Fecha Inicio" value="{{proyectos.fecha_Inicio}}" disabled>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field  class="col-sm-12">
+          <input matInput placeholder="Fecha Fin" value="{{proyectos.fecha_Fin}}" disabled>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+
+
+  <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4" mat-align-tabs="center">
+    <mat-tab label="Planeacion">
+      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4" (selectedIndexChange)='TabsIndex($event)' mat-align-tabs="center">
+        <mat-tab label="Interesados">
+          <mtx-grid [data]="list"
+                    [columns]="columns"
+                    [loading]="isLoading"
+                    [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+                    [rowHover]="rowHover"
+                    [rowStriped]="rowStriped"
+                    [columnHideable]="columnHideable"
+                    [columnSortable]="columnSortable"
+                    [columnPinnable]="columnPinnable"
+                    [expandable]="expandable"
+                    [expansionTemplate]="expansionTpl"
+                    [pageOnFront]="showPaginator"
+                    [showPaginator]="showPaginator"
+                    [pageSizeOptions]="[5,10,50,100]"
+                    [pageIndex]="0"
+                    [pageSize]="5">
+          </mtx-grid>
+          <ng-template #expansionTpl let-row>
+            {{row.name}}
+          </ng-template>
+          <div class="m-r-12">
+            <mat-icon (click)="openInteresadoDialog()">add</mat-icon>
+            <mat-icon (click)="openInteresadoMasivoDialog()">folder</mat-icon>
+            <mat-icon (click)="exportInte()">vertical_align_bottom</mat-icon>
+
+          </div>
+        </mat-tab>
+        <mat-tab label="Requisitos Contractuales">
+          <mtx-grid [data]="listRequisitosContractuales"
+                    [columns]="columnsRequisitosVista"
+                    [loading]="isLoading"
+                    [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+                    [rowHover]="rowHover"
+                    [rowStriped]="rowStriped"
+                    [columnHideable]="columnHideable"
+                    [columnSortable]="columnSortable"
+                    [columnPinnable]="columnPinnable"
+                    [expandable]="expandable"
+                    [expansionTemplate]="expansionTpl"
+                    [pageOnFront]="showPaginator"
+                    [showPaginator]="showPaginator"
+                    [pageSizeOptions]="[5,10,50,100]"
+                    [pageIndex]="0"
+                    [pageSize]="5">
+          </mtx-grid>
+          <ng-template #expansionTpl let-row>
+            {{row.name}}
+          </ng-template>
+          <div class="m-r-12">
+            <mat-icon (click)="openRequisitoDialog()">add</mat-icon>
+            <mat-icon (click)="openRequisitoMasivoContractualDialog()">folder</mat-icon>
+            <mat-icon (click)="exportRequiContra()">vertical_align_bottom</mat-icon>
+          </div>
+        </mat-tab>
+        <mat-tab label="Requisitos Tecnicos">
+          <mtx-grid [data]="listRequisitosTecnicos"
+                    [columns]="columnsRequisitosVista"
+                    [loading]="isLoading"
+                    [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+                    [rowHover]="rowHover"
+                    [rowStriped]="rowStriped"
+                    [columnHideable]="columnHideable"
+                    [columnSortable]="columnSortable"
+                    [columnPinnable]="columnPinnable"
+                    [expandable]="expandable"
+                    [expansionTemplate]="expansionTpl"
+                    [pageOnFront]="showPaginator"
+                    [showPaginator]="showPaginator"
+                    [pageSizeOptions]="[5,10,50,100]"
+                    [pageIndex]="0"
+                    [pageSize]="5">
+          </mtx-grid>
+          <ng-template #expansionTpl let-row>
+            {{row.name}}
+          </ng-template>
+          <div class="m-r-12">
+            <mat-icon (click)="openRequisitoDialog()">add</mat-icon>
+            <mat-icon (click)="openRequisitoMasivoTecnicoDialog()">folder</mat-icon>
+            <mat-icon (click)="exportRequiTecnicos()">vertical_align_bottom</mat-icon>
+          </div>
+        </mat-tab>
+        <mat-tab label="Entregables">
+          <mtx-grid [data]="listEDT"
+                    [columns]="columnsEDT"
+                    [rowSelectable]="rowSelectable"
+                    [multiSelectable]="multiSelectable"
+                    [loading]="isLoading"
+                    [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+                    [rowHover]="rowHover"
+                    [rowStriped]="rowStriped"
+                    [columnHideable]="columnHideable"
+                    [columnSortable]="columnSortable"
+                    [columnPinnable]="columnPinnable"
+                    [expandable]="expandable"
+                    [expansionTemplate]="expansionTpl"
+                    [pageOnFront]="showPaginator"
+                    [showPaginator]="showPaginator"
+                    [pageSizeOptions]="[5,10,50,100]"
+                    [pageIndex]="0"
+                    [pageSize]="5"
+                    (rowSelectionChange)="changeSelectEDT($event)">
+          </mtx-grid>
+          <ng-template #expansionTpl let-row>
+            {{row.name}}
+          </ng-template>
+          <div class="m-r-12">
+            <mat-icon (click)="openEDTDialog()">add</mat-icon>
+          </div>
+        </mat-tab>
+        <mat-tab label="Actividades">
+          <mtx-grid [data]="listActividades"
+                    [columns]="columnsActividades"
+                    [loading]="isLoading"
+                    [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+                    [rowHover]="rowHover"
+                    [rowStriped]="rowStriped"
+                    [columnHideable]="columnHideable"
+                    [columnSortable]="columnSortable"
+                    [columnPinnable]="columnPinnable"
+                    [expandable]="expandable"
+                    [expansionTemplate]="expansionTpl"
+                    [pageOnFront]="showPaginator"
+                    [showPaginator]="showPaginator"
+                    [pageSizeOptions]="[5,10,50,100]"
+                    [pageIndex]="0"
+                    [pageSize]="5">
+          </mtx-grid>
+          <ng-template #expansionTpl let-row>
+            {{row.name}}
+          </ng-template>
+          <div class="m-r-12">
+            <mat-icon (click)="openActividad_ProyectoDialog()">add</mat-icon>
+          </div>
+        </mat-tab>
+        <mat-tab label="Recursos">
+          <mtx-grid [data]="listRecursos_Proyecto"
+                    [columns]="Recursos_ProyectoColumns"
+                    [loading]="isLoading"
+                    [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+                    [rowHover]="rowHover"
+                    [rowStriped]="rowStriped"
+                    [columnHideable]="columnHideable"
+                    [columnSortable]="columnSortable"
+                    [columnPinnable]="columnPinnable"
+                    [expandable]="expandable"
+                    [expansionTemplate]="expansionTpl"
+                    [pageOnFront]="showPaginator"
+                    [showPaginator]="showPaginator"
+                    [pageSizeOptions]="[5,10,50,100]"
+                    [pageIndex]="0"
+                    [pageSize]="5">
+          </mtx-grid>
+          <ng-template #expansionTpl let-row>
+            {{row.name}}
+          </ng-template>
+          <div class="m-r-12">
+            <mat-icon (click)="openRecursoDialog()">add</mat-icon>
+          </div>
+        </mat-tab>
+        <mat-tab label="Comunicaciones">
+          <mtx-grid [data]="listComunicaciones"
+                    [columns]="columnsComunicaciones"
+                    [loading]="isLoading"
+                    [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+                    [rowHover]="rowHover"
+                    [rowStriped]="rowStriped"
+                    [columnHideable]="columnHideable"
+                    [columnSortable]="columnSortable"
+                    [columnPinnable]="columnPinnable"
+                    [expandable]="expandable"
+                    [expansionTemplate]="expansionTpl"
+                    [pageOnFront]="showPaginator"
+                    [showPaginator]="showPaginator"
+                    [pageSizeOptions]="[5,10,50,100]"
+                    [pageIndex]="0"
+                    [pageSize]="5">
+          </mtx-grid>
+          <ng-template #expansionTpl let-row>
+            {{row.name}}
+          </ng-template>
+          <div class="m-r-12">
+            <mat-icon (click)="openComunicacionDialog()">add</mat-icon>
+            <mat-icon (click)="openComunicacionMasivoDialog()">folder</mat-icon>
+            <mat-icon (click)="exportComu()">vertical_align_bottom</mat-icon>
+          </div>
+        </mat-tab>
+        <mat-tab label="Riesgos">
+          <mtx-grid [data]="listRiesgos_Proyecto"
+                    [columns]="columnsRiesgos_Proyecto"
+                    [loading]="isLoading"
+                    [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+                    [rowHover]="rowHover"
+                    [rowStriped]="rowStriped"
+                    [columnHideable]="columnHideable"
+                    [columnSortable]="columnSortable"
+                    [columnPinnable]="columnPinnable"
+                    [expandable]="expandable"
+                    [expansionTemplate]="expansionTpl"
+                    [pageOnFront]="showPaginator"
+                    [showPaginator]="showPaginator"
+                    [pageSizeOptions]="[5,10,50,100]"
+                    [pageIndex]="0"
+                    [pageSize]="5">
+          </mtx-grid>
+          <ng-template #expansionTpl let-row>
+            {{row.name}}
+          </ng-template>
+          <div class="m-r-12">
+            <mat-icon (click)="openRiesgoDialog()">add</mat-icon>
+            <mat-icon (click)="openRiesgoMasivoDialog()">folder</mat-icon>
+            <mat-icon (click)="exportRiesgos()">vertical_align_bottom</mat-icon>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-tab>
+    <mat-tab label="Ejecucíon" disabled></mat-tab>
+    <mat-tab label="Cierre" disabled></mat-tab>
+  </mat-tab-group>
+
+  <router-outlet></router-outlet>
+
+</mat-card>
+
+<mat-icon routerLink="../../list">reply</mat-icon>

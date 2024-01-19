@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Actividad</h2>
+
+<mat-dialog-content>
+  <form>
+    <formly-form [model]="model" [fields]="fields2" [form]="form2"></formly-form>
+    <mtx-grid [data]="listIntervalos"
+              [columns]="columnsIntervalos"
+              [loading]="isLoading"
+              [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+              [rowHover]="rowHover"
+              [rowStriped]="rowStriped"
+              [columnHideable]="columnHideable"
+              [columnSortable]="columnSortable"
+              [columnPinnable]="columnPinnable"
+              [expandable]="expandable"
+              [expansionTemplate]="expansionTpl"
+              [pageOnFront]="showPaginator"
+              [showPaginator]="showPaginator"
+              disabled="!Disable"
+              [pageSizeOptions]="[5,10,50,100]"
+              [pageIndex]="0"
+              [pageSize]="5">
+    </mtx-grid>
+    <ng-template #expansionTpl let-row>
+      {{row.name}}
+    </ng-template>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="guardarIntervalo()">Guardar</button>
+  <button mat-raised-button color="warn" (click)="getdatatable()">Cerrar</button>
+</mat-dialog-actions>

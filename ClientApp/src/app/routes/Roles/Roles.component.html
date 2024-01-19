@@ -1,0 +1,40 @@
+<mat-card>
+  <div class=" row">
+    <div class="col-6"></div>
+    <div class="col-6">
+      <h1>Roles</h1>
+    </div>
+    <div class="col-6"></div>
+  </div>
+</mat-card>
+
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [loading]="isLoading"
+          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+          [rowHover]="rowHover"
+          [rowStriped]="rowStriped"
+          [columnHideable]="columnHideable"
+          [columnSortable]="columnSortable"
+          [columnPinnable]="columnPinnable"
+          [expandable]="expandable"
+          [expansionTemplate]="expansionTpl"
+          [pageOnFront]="showPaginator"
+          [showPaginator]="showPaginator"
+          [pageSizeOptions]="[5,10,50,100]"
+          [pageIndex]="0"
+          [pageSize]="5"
+          (sortChange)="changeSort($event)"
+          (selectionChange)="changeSelect($event)">
+</mtx-grid>
+<ng-template #expansionTpl let-row>
+  {{row.name}}
+</ng-template>
+<mat-card>
+  <div class="m-r-12" style="align-items:end">
+    <mat-icon (click)="openRolDialog()">add</mat-icon>
+  </div>
+</mat-card>
+
+
+

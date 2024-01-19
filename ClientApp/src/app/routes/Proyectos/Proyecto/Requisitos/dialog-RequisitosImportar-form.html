@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Masivo Requisitos {{TipoRequi}}</h2>
+
+<mat-dialog-content>
+  <form>
+    <formly-form>
+      <input (change)="capturarFile($event)" type="file">
+    </formly-form>
+    <h3 mat-dialog-title> Errores Masivo </h3>
+    <mtx-grid [data]="Data"
+              [columns]="columnsComunicaciones"
+              [loading]="isLoading"
+              [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+              [rowHover]="rowHover"
+              [rowStriped]="rowStriped"
+              [columnHideable]="columnHideable"
+              [columnSortable]="columnSortable"
+              [columnPinnable]="columnPinnable"
+              [expandable]="expandable"
+              [pageOnFront]="showPaginator"
+              [showPaginator]="showPaginator"
+              [pageSizeOptions]="[5,10,50,100]"
+              [pageIndex]="0"
+              [pageSize]="5">
+    </mtx-grid>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="guardarComunicacionMasivo()">Guardar</button>
+</mat-dialog-actions>

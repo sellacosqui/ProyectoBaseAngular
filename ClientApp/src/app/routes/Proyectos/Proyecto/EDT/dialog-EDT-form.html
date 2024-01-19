@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Entregables {{EDTs.nombre_Cuenta}}</h2>
+
+<mat-dialog-content>
+  <form>
+    <formly-form [model]="EDTs" [fields]="fields2" [form]="form2"></formly-form>
+    <div class="row" style="visibility : {{ Disable }}">
+         <h6>Requisitos Asignados</h6>
+        <mtx-grid [data]="listRequisitos"
+                  [columns]="columnsRequisitosVista"
+                  [loading]="isLoading"
+                  [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+                  [rowHover]="rowHover"
+                  [rowStriped]="rowStriped"
+                  [columnHideable]="columnHideable"
+                  [columnSortable]="columnSortable"
+                  [columnPinnable]="columnPinnable"
+                  [expandable]="expandable"
+                  [expansionTemplate]="expansionTpl"
+                  [pageOnFront]="showPaginator"
+                  [showPaginator]="showPaginator"
+                  disabled="!Disable"
+                  [pageSizeOptions]="[5,10,50,100]"
+                  [pageIndex]="0"
+                  [pageSize]="5">
+        </mtx-grid>
+        <ng-template #expansionTpl let-row>
+          {{row.name}}
+        </ng-template>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="guardarEDT()">Guardar</button>
+  <button mat-raised-button color="primary" style="visibility : {{ Disable }}" (click)="AsignarRequisitos()">Asignar Requisitos</button>
+</mat-dialog-actions>

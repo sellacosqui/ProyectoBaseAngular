@@ -1,0 +1,18 @@
+
+<div fxLayout="row wrap" class="matero-row">
+  <div fxFlex="100" class="matero-col">
+    <mat-card>
+      <mat-card-title id="Nombre_Proyecto"> Proyecto</mat-card-title>
+
+      <form [formGroup]="form2">
+        <formly-form [model]="proyectos" [fields]="fields2" [form]="form2"></formly-form>
+        <button mat-raised-button (click)='submit2()' color="primary" [disabled]="!form2.valid">Guadar</button>
+        <button mat-raised-button color="red" (click)='cancelar()' style="margin-left: 10px">Cancelar</button>
+      </form>
+    </mat-card>
+  </div>
+
+
+
+</div>
+<mat-icon routerLink="/Proyectos/list">reply</mat-icon>

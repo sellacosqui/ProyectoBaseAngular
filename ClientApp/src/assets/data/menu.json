@@ -1,0 +1,27 @@
+{
+  "menu": [
+    {
+      "route": "dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "dashboard",
+      "children": [
+       
+      ]
+    },
+    {
+      "route": "/Proyectos",
+      "name": "proyectos",
+      "type": "sub",
+      "icon": "format_line_spacing",
+      "children": [
+        {
+          "route": "/Proyectos/24",
+          "name": "proyectoActivo",
+          "type": "link"
+        }
+      ]
+    }
+
+  ]
+}

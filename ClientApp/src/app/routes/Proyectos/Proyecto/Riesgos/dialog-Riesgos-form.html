@@ -1,0 +1,163 @@
+<h2 mat-dialog-title>Riesgo</h2>
+
+<mat-dialog-content>
+  <form>
+    <formly-form [model]="model" [form]="form2">
+      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4"  (selectedIndexChange)='TabsIndex($event)' mat-align-tabs="center">
+        <mat-tab label="Identificación de Riesgo">
+          <mat-form-field class="col-12">
+            <mtx-select #select
+                        [items]="listEntregables | toObservable | async"
+                        [bindLabel]="'nombre_Cuenta'"
+                        [bindValue]="'id'"
+                        [appendTo]="'app-admin-layout'"
+                        [multiple]="false"
+                        [placeholder]="'Entregable'"
+                        [required]="true"
+                        [closeOnSelect]="true"
+                        [(ngModel)]="model.entregable_Id"
+                        [ngModelOptions]="{standalone: true}">
+            </mtx-select>
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Posible Dueño</mat-label>
+            <input matInput [(ngModel)]="model.posible_Dueno" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mtx-select #select
+                        [items]="listRiesgos | toObservable | async"
+                        [bindLabel]="'nombre'"
+                        [bindValue]="'id'"
+                        [appendTo]="'app-admin-layout'"
+                        [multiple]="false"
+                        [placeholder]="'Riesgo'"
+                        [required]="true"
+                        [closeOnSelect]="true"
+                        [(ngModel)]="model.riesgo_Id"
+                        (change)="SelectRiesgo()"
+                        [ngModelOptions]="{standalone: true}">
+            </mtx-select>
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Causa</mat-label>
+            <textarea matInput aria-label="Comment" rows="4" [(ngModel)]="Causa" disabled [ngModelOptions]="{standalone: true}" cdkTextareaAutosize></textarea>
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Conseciencia</mat-label>
+            <textarea matInput aria-label="Comment" rows="4" [(ngModel)]="Conseciencia" disabled [ngModelOptions]="{standalone: true}" cdkTextareaAutosize></textarea>
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Descripcíon</mat-label>
+            <textarea matInput aria-label="Comment" rows="4" [(ngModel)]="Descripcion" disabled [ngModelOptions]="{standalone: true}" cdkTextareaAutosize></textarea>
+          </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Análisis Cualitativo">
+          <mat-form-field class="col-6">
+            <mat-select [(ngModel)]="probabilidad" [ngModelOptions]="{standalone: true}" required placeholder="Probabilidad (0-100)" (selectionChange)="selectCualitativo()">
+              <mat-option *ngFor="let food of list" [value]="food.nombre" matTooltip={{food.descripccion}}>
+                {{ food.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-6">
+            <mat-select [(ngModel)]="impacto_Tiempo" [ngModelOptions]="{standalone: true}" required placeholder="Impacto Tiempo (Dias)" (selectionChange)="selectCualitativo()">
+              <mat-option *ngFor="let food of list" [value]="food.nombre" matTooltip={{food.descripccion}}>
+                {{ food.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-4">
+            <mat-select [(ngModel)]="impacto_Costo" [ngModelOptions]="{standalone: true}" required placeholder="Impacto Costo (Pesos)" (selectionChange)="selectCualitativo()">
+              <mat-option *ngFor="let food of list" [value]="food.nombre" matTooltip={{food.descripccion}}>
+                {{ food.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-4">
+            <mat-label>Severidad</mat-label>
+            <input matInput [(ngModel)]="model.severidad" disabled [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field class="col-4">
+            <mat-label>Valoracion</mat-label>
+            <input matInput [(ngModel)]="model.valoracion" disabled [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Análisis Cuantitativo">
+          <mat-form-field class="col-4">
+            <mat-label>Probabilidad Cuantitativa (0-100)</mat-label>
+            <input matInput [(ngModel)]="model.probabilidad_Cuantitativa" type="number" max="100" min="0"  [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field class="col-4">
+            <mat-label>Impacto en Tiempos(Dias)</mat-label>
+            <input matInput [(ngModel)]="model.impacto_Dias_Cuantitativa" type="number"  min="0"  [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field class="col-4">
+            <mat-label>Impacto en Costos(Pesos)</mat-label>
+            <input matInput [(ngModel)]="model.impacto_Costos_Cuantitativa" type="number"  min="0"  [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Plan de Respuesta">
+          <mat-form-field class="col-3">
+            <mtx-select #select
+                        [items]="lisRespuestas | toObservable | async"
+                        [bindLabel]="'nombre'"
+                        [bindValue]="'id'"
+                        [appendTo]="'app-admin-layout'"
+                        [multiple]="false"
+                        [placeholder]="'Tipo Respuesta'"
+                        [required]="true"
+                        [closeOnSelect]="true"
+                        [(ngModel)]="model.tipo_respuesta"
+                        [ngModelOptions]="{standalone: true}">
+            </mtx-select>
+          </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label>Acción de Respuesta</mat-label>
+            <input matInput [(ngModel)]="model.accion_Respuesta"  [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label>Tiempo de Respuesta(dias)</mat-label>
+            <input matInput [(ngModel)]="model.tiempo_Respuesta" type="number"  min="0"  [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label>Costo de Respuesta(Pesos)</mat-label>
+            <input matInput [(ngModel)]="model.costo_Respuesta" type="number" min="0"  [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Riesgo Residual">
+          <mat-form-field class="col-4">
+            <mat-label>Nueva Probabilidad Cuantitativa (0-100)</mat-label>
+            <input matInput [(ngModel)]="model.probabilidad_Residual" type="number" max="100" min="0" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field class="col-4">
+            <mat-label>Impacto en Tiempos(Dias)</mat-label>
+            <input matInput [(ngModel)]="model.impacto_Dias_Residual" type="number" min="0" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field class="col-4">
+            <mat-label>Impacto en Costos(Pesos)</mat-label>
+            <input matInput [(ngModel)]="model.impacto_Costos_Residual" type="number" min="0" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Reserva de Contingencia">
+          <mat-form-field class="col-4">
+            <mat-label>Reserva en Tiempo</mat-label>
+            <input matInput [(ngModel)]="reservaT" disabled [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field class="col-4">
+            <mat-label>Reserva en Costo</mat-label>
+            <input matInput [(ngModel)]="reservaC" disabled [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field class="col-4">
+            <mat-label>Acciones Contingentes</mat-label>
+            <input matInput [(ngModel)]="model.acciones_Contingentes"  [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+        </mat-tab>
+      </mat-tab-group>
+    </formly-form>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="guardarRiesgo()">Guardar</button>
+</mat-dialog-actions>

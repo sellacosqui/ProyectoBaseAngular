@@ -1,0 +1,78 @@
+{
+  "menu": [
+    {
+      "route": "dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "dashboard",
+      "children": [
+
+      ]
+    },
+    {
+      "route": "/Proyectos",
+      "name": "proyectos",
+      "type": "sub",
+      "icon": "format_line_spacing",
+      "children": [
+        {
+          "route": "/list",
+          "name": "proyectosList",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "name": "configuracion",
+      "type": "sub",
+      "icon": "settings",
+      "children": [
+        {
+          "route": "Recursos",
+          "name": "Recursos",
+          "icon": "build",
+          "type": "link"
+        },
+        {
+          "route": "Actividades",
+          "name": "Actividades",
+          "icon": "build",
+          "type": "link"
+        },
+        {
+          "route": "ListaDespegable",
+          "name": "ListaDesplegable",
+          "icon": "build",
+          "type": "link"
+        },
+        {
+          "route": "Usuarios",
+          "name": "Usuarios",
+          "icon": "build",
+          "type": "link"
+        },
+        {
+          "route": "Roles",
+          "name": "Roles",
+          "icon": "build",
+          "type": "link"
+        },
+        {
+          "route": "Clientes",
+          "name": "Clientes",
+          "icon": "build",
+          "type": "link"
+        },
+        {
+          "route": "Riesgos",
+          "name": "Riesgos",
+          "icon": "build",
+          "type": "link"
+        }
+      ]
+    }
+
+  ]
+
+}
